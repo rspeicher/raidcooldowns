@@ -15,10 +15,10 @@ local cooldowns = {
 	["DEATHKNIGHT"] = {
 	},
 	["DRUID"] = {
-		-- [GetSpellInfo(17116)] = { id = 17116, cd = 180 },           -- Nature's Swiftness
-		-- [GetSpellInfo(26994)] = { id = 26994, cd = 1200, ora = 1 }, -- Rebirth (Rank 6)
-		-- [GetSpellInfo(29166)] = { id = 29166, cd = 360 },           -- Innervate
-		-- [GetSpellInfo(5209)]  = { id = 5209,  cd = 600 },           -- Challenging Roar
+		[GetSpellInfo(5209)]  = { id = 5209,  cd = 180 },           -- Challenging Roar
+		[GetSpellInfo(29166)] = { id = 29166, cd = 360 },           -- Innervate
+		[GetSpellInfo(17116)] = { id = 17116, cd = 180 },           -- Nature's Swiftness
+		[GetSpellInfo(48477)] = { id = 48477, cd = 1200, ora = 1 }, -- Rebirth
 	},
 	["HUNTER"] = {
 		-- [GetSpellInfo(34477)] = { id = 34477, cd = 120 },           -- Misdirection
