@@ -16,18 +16,16 @@ locale\enUS.lua
 RaidCooldowns.lua
 Cooldowns.lua
 ModuleBase.lua
+classes\Druid.lua
+classes\Mage.lua
+classes\Hunter.lua
+classes\Paladin.lua
+classes\Priest.lua
+classes\Rogue.lua
+classes\Shaman.lua
+classes\Warlock.lua
+classes\Warrior.lua
 
 # Display
 Display.lua
 Config.lua
-
-# 
-# classes\Druid.lua
-# classes\Mage.lua
-# classes\Hunter.lua
-# classes\Paladin.lua
-# classes\Priest.lua
-# classes\Rogue.lua
-# classes\Shaman.lua
-# classes\Warlock.lua
-# classes\Warrior.lua

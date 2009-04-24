@@ -65,31 +65,45 @@ function mod:OnInitialize()
 	
 	self:UnregisterAllEvents()
 	self:RegisterEvent("PLAYER_LOGIN")
-	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+	--self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 
-	self.prefix = "RaCD"
-	self:RegisterComm(self.prefix)
-	self:RegisterComm("oRA")
-	self:RegisterComm("CTRA")
-	
 	playerName = UnitName("player")
 	
 	self:CreateFrame()
 end
 
 function mod:OnEnable()
+	--@debug@
+	self:Print("OnEnable()")
+	--@end-debug@
 end
 
 function mod:OnDisable()
+	--@debug@
+	self:Print("OnDisable()")
+	--@end-debug@
 end
 
 function mod:StartCooldown(sender, spellId, cooldown)
+	--@debug@
+	self:Print("StartCooldown(", sender, spellId, cooldown, ")")
+	--@end-debug@
+	
 	if self.db.profile.hideSelf and sender == playerName then return end
 	if not self.db.profile.spells[spellId] then return end -- Only show a bar for this spell if the user enabled it
 	
-	local bar = barGroup:NewTimerBar((sender .. "_" .. spellId), sender, cooldown, cooldown, spellId)
-	bar.caster  = sender
-	bar.spellId = spellId
+	-- Because we now scan all spells whenever a Spell Cooldown event is fired,
+	-- a sync might be sent multiple times for the same spell. This block prevents
+	-- the bar from constantly updating its max time, making it look like the
+	-- cooldown is being used again.
+	local bar = barGroup:GetBar((sender .. "_" .. spellId))
+	if bar == nil then
+		bar = barGroup:NewTimerBar((sender .. "_" .. spellId), sender, cooldown, cooldown, spellId)
+		bar.caster  = sender
+		bar.spellId = spellId
+	else
+		bar:UpdateTimer(cooldown)
+	end
 
 	local _, c = UnitClass(sender)
 	if not c then
@@ -110,39 +124,10 @@ function mod:StartCooldown(sender, spellId, cooldown)
 	end
 end
 
-function mod:OnCommReceived(prefix, msg, distro, sender)
-	if self.db.profile.hideSelf and sender == playerName then return end
-	
-	local spellId, cooldown = 0, 0
-	
-	if prefix == "oRA" or prefix == "CTRA" then 
-		spellId, cooldown = select(3, msg:find("CD (%d) (%d+)"))
-		spellId  = tonumber(spellId)
-		cooldown = tonumber(cooldown)
-		
-		if spellId == 0 or cooldown == 0 then return end
-		
-		local _, c = UnitClass(sender)
-		if RaidCooldowns.cooldowns[c] then
-			for k, v in pairs(RaidCooldowns.cooldowns[c]) do
-				if v.ora and v.ora == spellId then -- spellId is, in this case, the oRA ID
-					spellId = v.id
-					self:StartCooldown(sender, spellId, v.cd)
-					
-					return
-				end
-			end
-		end
-	else
-		spellId, cooldown = select(3, msg:find("(%d+) (%d+)"))
-		spellId  = tonumber(spellId)
-		cooldown = tonumber(cooldown)
-		
-		self:StartCooldown(sender, spellId, cooldown)
-	end
-end
-
 function mod:PLAYER_LOGIN()
+	--@debug@
+	self:Print("PLAYER_LOGIN()")
+	--@end-debug@
 	self:SetAnchors(true)
 	self:UpdateDisplay()
 	self:UnregisterEvent("PLAYER_LOGIN")

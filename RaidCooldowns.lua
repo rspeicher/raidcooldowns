@@ -8,10 +8,13 @@ function RaidCooldowns:OnInitialize()
 	-- self:SetEnabledState(false) -- Enabled when we join a raid
 	
 	--@debug@
-	self:Print("RaidCooldowns:OnInitialize -- Debugging enabled")
+	self:Print("OnInitialize")
 	--@end-debug@
 
 	self.prefix = "RCD2"
+	self:RegisterComm(self.prefix)
+	self:RegisterComm("oRA")
+	self:RegisterComm("CTRA")
 	
 	self:RegisterEvent("RAID_ROSTER_UPDATE")
 	
@@ -46,7 +49,7 @@ do
 	local inRaid = false
 	function RaidCooldowns:RAID_ROSTER_UPDATE()
 		--@debug@
-		self:Print("RaidCooldowns:RAID_ROSTER_UPDATE")
+		self:Print("RAID_ROSTER_UPDATE")
 		--@end-debug@
 		
 		local inRaidNow = UnitInRaid("player")
@@ -68,5 +71,37 @@ end
 --------------[[		Comm Methods		]]--------------
 
 function RaidCooldowns:OnCommReceived(prefix, msg, distro, sender)
-	-- We don't do anything with these yet, but RaidCooldowns_Display does!
+	if self:GetModule("Display").db.profile.hideSelf and sender == playerName then return end
+	
+	--@debug@
+	self:Print("OnCommReceived(", prefix, msg, distro, sender, ")")
+	--@end-debug@
+	
+	local spellId, cooldown = 0, 0
+	
+	if prefix == "oRA" or prefix == "CTRA" then
+		spellId, cooldown = select(3, msg:find("CD (%d) (%d+)"))
+		spellId  = tonumber(spellId)
+		cooldown = tonumber(cooldown)
+		
+		if spellId == 0 or cooldown == 0 then return end
+		
+		local _, c = UnitClass(sender)
+		if self.cooldowns[c] then
+			for k, v in pairs(self.cooldowns[c]) do
+				if v.ora and v.ora == spellId then -- spellId is, in this case, the oRA ID
+					spellId = v.id
+					self:GetModule("Display"):StartCooldown(sender, spellId, v.cd)
+					
+					return
+				end
+			end
+		end
+	else
+		spellId, cooldown = select(3, msg:find("(%d+) (%d+)"))
+		spellId  = tonumber(spellId)
+		cooldown = tonumber(cooldown)
+		
+		self:GetModule("Display"):StartCooldown(sender, spellId, cooldown)
+	end
 end
