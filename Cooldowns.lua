@@ -34,14 +34,14 @@ local cooldowns = {
 		-- [GetSpellInfo(19752)] = { id = 19752, cd = 3600, ora = 4 }, -- Divine Intervention
 	},
 	["PRIEST"] = {
-		[GetSpellInfo(33206)] = { id = 33206, cd = 120 },           -- Pain Suppression
-		[GetSpellInfo(6346)]  = { id = 6346,  cd = 180 },           -- Fear Ward
-		[GetSpellInfo(47788)] = { id = 47788, cd = 180 },           -- Guardian Spirit
+		-- [GetSpellInfo(33206)] = { id = 33206, cd = 120 },           -- Pain Suppression
+		-- [GetSpellInfo(6346)]  = { id = 6346,  cd = 180 },           -- Fear Ward
+		-- [GetSpellInfo(47788)] = { id = 47788, cd = 180 },           -- Guardian Spirit
 	},
 	["ROGUE"] = {
-		[GetSpellInfo(31224)] = { id = 31224, cd = 60 },            -- Cloak of Shadows
-		[GetSpellInfo(1766)]  = { id = 1766,  cd = 10 },            -- Kick (Rank 5)
+		[GetSpellInfo(31224)] = { id = 31224, cd = 90 },            -- Cloak of Shadows
 		[GetSpellInfo(1725)]  = { id = 1725,  cd = 30 },            -- Distract
+		[GetSpellInfo(1766)]  = { id = 1766,  cd = 10 },            -- Kick
 	},
 	["SHAMAN"] = {
 		-- [GetSpellInfo(hero)]  = { id = hero,  cd = 600 },           -- Bloodlust/Heroism
@@ -52,8 +52,8 @@ local cooldowns = {
 		-- [GetSpellInfo(16190)] = { id = 16190, cd = 300 },           -- Mana Tide Totem
 	},
 	["WARLOCK"] = {
-		[GetSpellInfo(27239)] = { id = 27239, cd = 1800, ora = 3 }, -- Soulstone Resurrection
-		[GetSpellInfo(29858)] = { id = 29858, cd = 300 },           -- Soulshatter
+		-- [GetSpellInfo(27239)] = { id = 27239, cd = 1800, ora = 3 }, -- Soulstone Resurrection
+		-- [GetSpellInfo(29858)] = { id = 29858, cd = 300 },           -- Soulshatter
 	},
 	["WARRIOR"] = {
 		-- [GetSpellInfo(871)]   = { id = 871,   cd = 1800 },          -- Shield Wall
