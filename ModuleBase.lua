@@ -58,11 +58,19 @@ function base:ScanSpells()
 	self:Print("ScanSpells")
 	--@end-debug@
 	
-	local startTime, duration, enabled
+	local startTime, duration, enabled, remaining
 	for k, v in pairs(self.cooldowns) do
 		startTime, cooldown, enabled = GetSpellCooldown(k)
 		if startTime > 0 and cooldown > 1 and enabled == 1 then
-			self:Sync(v.id, math.ceil(startTime + cooldown - GetTime()))
+			remaining = math.ceil(startTime + cooldown - GetTime())
+			self:Sync(v.id, remaining)
+			
+			if not oRA and v.ora ~= nil then
+				--@debug@
+				self:Print("Sending oRA Comm:", v.ora, (remaining / 60))
+				--@end-debug@
+				RaidCooldowns:SendCommMessage("oRA", "CD " .. v.ora .. " " .. (remaining / 60), "RAID")
+			end
 		end
 	end
 end
