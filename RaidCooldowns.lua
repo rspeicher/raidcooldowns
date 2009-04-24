@@ -3,6 +3,8 @@ local MINOR_VERSION = tonumber(("$Revision: 2 $"):match("%d+"))
 RaidCooldowns = LibStub("AceAddon-3.0"):NewAddon("RaidCooldowns", "AceConsole-3.0", "AceComm-3.0", "AceEvent-3.0")
 RaidCooldowns.MINOR_VERSION = MINOR_VERSION
 
+local UnitName = _G.UnitName
+
 function RaidCooldowns:OnInitialize()
 	self:UnregisterAllEvents()
 	-- self:SetEnabledState(false) -- Enabled when we join a raid
@@ -17,6 +19,7 @@ function RaidCooldowns:OnInitialize()
 	self:RegisterComm("CTRA")
 	
 	self:RegisterEvent("RAID_ROSTER_UPDATE")
+	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	
 	-- Logged in or reloaded in a raid; fake a RAID_ROSTER_UPDATE
 	if UnitInRaid("player") then
@@ -66,6 +69,26 @@ do
 			self:Disable()
 		end
 	end
+end
+
+function RaidCooldowns:COMBAT_LOG_EVENT_UNFILTERED(event, _, eventType, _, srcName, _, _, dstName, _, spellId, spellName, _, ...)
+	if eventType ~= "SPELL_CAST_SUCCESS" and eventType ~= "SPELL_RESURRECT" then return end
+	if not srcName or srcName == UnitName("player") then return end
+	
+	--@debug@
+	--self:Print("Processing CLEU", eventType, srcName, spellId, spellName)
+	--@end-debug@
+	
+	local _, c = UnitClass(srcName)
+	if self.cooldowns[c] then
+		local spells = self.cooldowns[c]
+		if spells[spellName] then
+			self:GetModule("Display"):StartCooldown(srcName, spellId, spells[spellName].cd)
+			return
+		end
+	end
+	
+	return
 end
 
 --------------[[		Comm Methods		]]--------------

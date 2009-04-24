@@ -65,7 +65,6 @@ function mod:OnInitialize()
 	
 	self:UnregisterAllEvents()
 	self:RegisterEvent("PLAYER_LOGIN")
-	--self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 
 	playerName = UnitName("player")
 	
@@ -131,22 +130,6 @@ function mod:PLAYER_LOGIN()
 	self:SetAnchors(true)
 	self:UpdateDisplay()
 	self:UnregisterEvent("PLAYER_LOGIN")
-end
-
-function mod:COMBAT_LOG_EVENT_UNFILTERED(event, _, eventType, _, srcName, _, _, dstName, _, spellId, spellName, _, ...)
-	if eventType ~= "SPELL_CAST_SUCCESS" then return end
-	if not srcName then return end
-	
-	local _, c = UnitClass(srcName)
-	if RaidCooldowns.cooldowns[c] then
-		local spells = RaidCooldowns.cooldowns[c]
-		if spells[spellName] and not spells[spellName].ora then
-			self:StartCooldown(srcName, spellId, spells[spellName].cd)
-			return
-		end
-	end
-	
-	return
 end
 
 --[[		Configuration Methods		]]--
