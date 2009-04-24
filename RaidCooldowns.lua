@@ -75,14 +75,13 @@ function RaidCooldowns:COMBAT_LOG_EVENT_UNFILTERED(event, _, eventType, _, srcNa
 	if eventType ~= "SPELL_CAST_SUCCESS" and eventType ~= "SPELL_RESURRECT" then return end
 	if not srcName or srcName == UnitName("player") then return end
 	
-	--@debug@
-	--self:Print("Processing CLEU", eventType, srcName, spellId, spellName)
-	--@end-debug@
-	
 	local _, c = UnitClass(srcName)
 	if self.cooldowns[c] then
 		local spells = self.cooldowns[c]
 		if spells[spellName] then
+			--@debug@
+			self:Print("Starting cooldown from CLEU", srcName, spellName)
+			--@end-debug@
 			self:GetModule("Display"):StartCooldown(srcName, spellId, spells[spellName].cd)
 			return
 		end
