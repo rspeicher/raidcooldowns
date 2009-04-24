@@ -21,8 +21,8 @@ local cooldowns = {
 		[GetSpellInfo(48477)] = { id = 48477, cd = 1200, ora = 1 }, -- Rebirth
 	},
 	["HUNTER"] = {
-		-- [GetSpellInfo(34477)] = { id = 34477, cd = 120 },           -- Misdirection
-		-- [GetSpellInfo(5384)]  = { id = 5384,  cd = 30 },            -- Feign Death
+		[GetSpellInfo(5384)]  = { id = 5384,  cd = 30 },            -- Feign Death
+		[GetSpellInfo(34477)] = { id = 34477, cd = 30 },            -- Misdirection
 	},
 	["MAGE"] = {
 		-- [GetSpellInfo(2139)]  = { id = 2139,  cd = 24 },            -- Counterspell
