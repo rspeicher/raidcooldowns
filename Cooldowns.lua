@@ -25,8 +25,8 @@ local cooldowns = {
 		[GetSpellInfo(34477)] = { id = 34477, cd = 30 },            -- Misdirection
 	},
 	["MAGE"] = {
-		-- [GetSpellInfo(2139)]  = { id = 2139,  cd = 24 },            -- Counterspell
-		-- [GetSpellInfo(45438)] = { id = 45438, cd = 300 },           -- Ice Block
+		[GetSpellInfo(2139)]  = { id = 2139,  cd = 24 },            -- Counterspell
+		[GetSpellInfo(45438)] = { id = 45438, cd = 300 },           -- Ice Block
 	},
 	["PALADIN"] = {
 		-- [GetSpellInfo(642)]   = { id = 642,   cd = 300 },           -- Divine Shield (Rank 2)
