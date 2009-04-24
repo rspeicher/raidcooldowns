@@ -262,5 +262,5 @@ end
 function mod:TimerFinished(cbk, group, bar, name)
 	if not self.db.profile.readyMsg then return end
 
-	self:Print(L["%s's %s is up."]:format(bar.caster, GetSpellInfo(bar.spellId)))
+	RaidCooldowns:Print(L["%s's %s is up."]:format(bar.caster, GetSpellInfo(bar.spellId)))
 end
