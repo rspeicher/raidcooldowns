@@ -29,9 +29,10 @@ local cooldowns = {
 		[GetSpellInfo(45438)] = { id = 45438, cd = 300 },           -- Ice Block
 	},
 	["PALADIN"] = {
-		-- [GetSpellInfo(642)]   = { id = 642,   cd = 300 },           -- Divine Shield (Rank 2)
-		-- [GetSpellInfo(10278)] = { id = 10278, cd = 300,  ora = 9 }, -- Blessing of Protection (Rank 3) [requires talent info]
-		-- [GetSpellInfo(19752)] = { id = 19752, cd = 3600, ora = 4 }, -- Divine Intervention
+		[GetSpellInfo(642)]   = { id = 642,   cd = 300 },           -- Divine Shield
+		[GetSpellInfo(498)]   = { id = 498,   cd = 180 },           -- Divine Protection
+		[GetSpellInfo(10278)] = { id = 10278, cd = 300 },           -- Hand of Protection
+		[GetSpellInfo(19752)] = { id = 19752, cd = 1200, ora = 4 }, -- Divine Intervention
 	},
 	["PRIEST"] = {
 		[GetSpellInfo(6346)]  = { id = 6346,  cd = 180 },           -- Fear Ward
