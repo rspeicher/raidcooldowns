@@ -4,10 +4,8 @@ assert(RaidCooldowns, "RaidCooldowns not found!")
 	["Localized Spell Name"] = {
 		id = 12345, -- Spell ID
 		cd = 123,   -- Spell's cooldown, in seconds
-		ora = x,    -- Spell's oRA sync id; if set, RaidCooldowns will not display 
-	}               -- this cooldown unless it was synced from another RCD user.
-	
-	FIXME: Most of this data is probably flat-out wrong.
+		ora = x,    -- Spell's oRA sync id, if available
+	}
 ]]
 
 local hero = (UnitFactionGroup("player") == "Alliance") and 32182 or 2825
@@ -45,10 +43,10 @@ local cooldowns = {
 		[GetSpellInfo(1766)]  = { id = 1766,  cd = 10 },            -- Kick
 	},
 	["SHAMAN"] = {
-		-- [GetSpellInfo(hero)]  = { id = hero,  cd = 600 },           -- Bloodlust/Heroism
-		-- [GetSpellInfo(16188)] = { id = 16188, cd = 180 },           -- Nature's Swiftness
-		-- [GetSpellInfo(20608)] = { id = 20608, cd = 3600, ora = 2 }, -- Reincarnation
-		-- [GetSpellInfo(16190)] = { id = 16190, cd = 300 },           -- Mana Tide Totem
+		[GetSpellInfo(hero)]  = { id = hero,  cd = 300 },           -- Bloodlust/Heroism
+		[GetSpellInfo(16190)] = { id = 16190, cd = 300 },           -- Mana Tide Totem
+		[GetSpellInfo(16188)] = { id = 16188, cd = 180 },           -- Nature's Swiftness
+		[GetSpellInfo(20608)] = { id = 20608, cd = 3600, ora = 2 }, -- Reincarnation
 	},
 	["WARLOCK"] = {
 		[GetSpellInfo(47883)] = { id = 47883, cd = 1800, ora = 3 }, -- Soulstone Resurrection
