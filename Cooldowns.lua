@@ -48,8 +48,6 @@ local cooldowns = {
 		-- [GetSpellInfo(hero)]  = { id = hero,  cd = 600 },           -- Bloodlust/Heroism
 		-- [GetSpellInfo(16188)] = { id = 16188, cd = 180 },           -- Nature's Swiftness
 		-- [GetSpellInfo(20608)] = { id = 20608, cd = 3600, ora = 2 }, -- Reincarnation
-		-- [GetSpellInfo(2894)]  = { id = 2894,  cd = 1200 },          -- Fire Elemental Totem
-		-- [GetSpellInfo(2062)]  = { id = 2062,  cd = 1200 },          -- Earth Elemental Totem
 		-- [GetSpellInfo(16190)] = { id = 16190, cd = 300 },           -- Mana Tide Totem
 	},
 	["WARLOCK"] = {
