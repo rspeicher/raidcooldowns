@@ -52,8 +52,8 @@ local cooldowns = {
 		-- [GetSpellInfo(16190)] = { id = 16190, cd = 300 },           -- Mana Tide Totem
 	},
 	["WARLOCK"] = {
-		-- [GetSpellInfo(27239)] = { id = 27239, cd = 1800, ora = 3 }, -- Soulstone Resurrection
-		-- [GetSpellInfo(29858)] = { id = 29858, cd = 300 },           -- Soulshatter
+		[GetSpellInfo(47883)] = { id = 47883, cd = 1800, ora = 3 }, -- Soulstone Resurrection
+		[GetSpellInfo(29858)] = { id = 29858, cd = 300 },           -- Soulshatter
 	},
 	["WARRIOR"] = {
 		-- [GetSpellInfo(871)]   = { id = 871,   cd = 1800 },          -- Shield Wall
