@@ -29,10 +29,10 @@ local cooldowns = {
 		[GetSpellInfo(45438)] = { id = 45438, cd = 300 },           -- Ice Block
 	},
 	["PALADIN"] = {
-		[GetSpellInfo(642)]   = { id = 642,   cd = 300 },           -- Divine Shield
-		[GetSpellInfo(498)]   = { id = 498,   cd = 180 },           -- Divine Protection
-		[GetSpellInfo(10278)] = { id = 10278, cd = 300 },           -- Hand of Protection
 		[GetSpellInfo(19752)] = { id = 19752, cd = 1200, ora = 4 }, -- Divine Intervention
+		[GetSpellInfo(498)]   = { id = 498,   cd = 180 },           -- Divine Protection
+		[GetSpellInfo(642)]   = { id = 642,   cd = 300 },           -- Divine Shield
+		[GetSpellInfo(10278)] = { id = 10278, cd = 300 },           -- Hand of Protection
 	},
 	["PRIEST"] = {
 		[GetSpellInfo(6346)]  = { id = 6346,  cd = 180 },           -- Fear Ward
@@ -57,10 +57,10 @@ local cooldowns = {
 		[GetSpellInfo(29858)] = { id = 29858, cd = 300 },           -- Soulshatter
 	},
 	["WARRIOR"] = {
-		-- [GetSpellInfo(871)]   = { id = 871,   cd = 1800 },          -- Shield Wall
-		-- [GetSpellInfo(12975)] = { id = 12975, cd = 480 },           -- Last Stand
-		-- [GetSpellInfo(6554)]  = { id = 6554,  cd = 10 },            -- Pummel
-		-- [GetSpellInfo(1161)]  = { id = 1161,  cd = 600 },           -- Challenging Shout
+		[GetSpellInfo(1161)]  = { id = 1161,  cd = 180 },           -- Challenging Shout
+		[GetSpellInfo(12975)] = { id = 12975, cd = 180 },           -- Last Stand
+		[GetSpellInfo(6554)]  = { id = 6554,  cd = 10 },            -- Pummel
+		[GetSpellInfo(871)]   = { id = 871,   cd = 300 },           -- Shield Wall
 	},
 }
 
