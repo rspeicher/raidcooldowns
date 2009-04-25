@@ -11,12 +11,20 @@ assert(RaidCooldowns, "RaidCooldowns not found!")
 local hero = (UnitFactionGroup("player") == "Alliance") and 32182 or 2825
 local cooldowns = {
 	["DEATHKNIGHT"] = {
+		[GetSpellInfo(51052)] = { id = 51052, cd = 120 },           -- Anti-magic Zone
+		[GetSpellInfo(49222)] = { id = 49222, cd = 120 },           -- Bone Shield
+		[GetSpellInfo(49576)] = { id = 49576, cd = 35 },            -- Death Grip
+		[GetSpellInfo(48792)] = { id = 48792, cd = 60 },            -- Icebound Fortitude
+		[GetSpellInfo(49039)] = { id = 49039, cd = 180 },           -- Lichborne
+		[GetSpellInfo(47528)] = { id = 47528, cd = 10 },            -- Mind Freeze
 	},
 	["DRUID"] = {
+		[GetSpellInfo(22812)] = { id = 22812, cd = 60 },            -- Barksin
 		[GetSpellInfo(5209)]  = { id = 5209,  cd = 180 },           -- Challenging Roar
 		[GetSpellInfo(29166)] = { id = 29166, cd = 360 },           -- Innervate
 		[GetSpellInfo(17116)] = { id = 17116, cd = 180 },           -- Nature's Swiftness
 		[GetSpellInfo(48477)] = { id = 48477, cd = 1200, ora = 1 }, -- Rebirth
+		[GetSpellInfo(48447)] = { id = 48447, cd = 600 },           -- Tranquility
 	},
 	["HUNTER"] = {
 		[GetSpellInfo(5384)]  = { id = 5384,  cd = 30 },            -- Feign Death
@@ -29,12 +37,16 @@ local cooldowns = {
 	["PALADIN"] = {
 		[GetSpellInfo(19752)] = { id = 19752, cd = 1200, ora = 4 }, -- Divine Intervention
 		[GetSpellInfo(498)]   = { id = 498,   cd = 180 },           -- Divine Protection
+		[GetSpellInfo(64205)] = { id = 64205, cd = 120 },           -- Divine Sacrifice
 		[GetSpellInfo(642)]   = { id = 642,   cd = 300 },           -- Divine Shield
 		[GetSpellInfo(10278)] = { id = 10278, cd = 300 },           -- Hand of Protection
+		[GetSpellInfo(48788)] = { id = 48788, cd = 1200 },          -- Lay on Hands
 	},
 	["PRIEST"] = {
+		[GetSpellInfo(64843)] = { id = 64843, cd = 600 },           -- Divine Hymn
 		[GetSpellInfo(6346)]  = { id = 6346,  cd = 180 },           -- Fear Ward
 		[GetSpellInfo(47788)] = { id = 47788, cd = 180 },           -- Guardian Spirit
+		[GetSpellInfo(64901)] = { id = 64901, cd = 360 },           -- Hymn of Hope
 		[GetSpellInfo(33206)] = { id = 33206, cd = 180 },           -- Pain Suppression
 		--@debug@
 		[GetSpellInfo(48066)] = { id = 48066, cd = 4 },             -- Power Word: Shield (Debug)
@@ -47,6 +59,8 @@ local cooldowns = {
 	},
 	["SHAMAN"] = {
 		[GetSpellInfo(hero)]  = { id = hero,  cd = 300 },           -- Bloodlust/Heroism
+		[GetSpellInfo(49231)] = { id = 49231, cd = 10 },            -- Earth Shock
+		[GetSpellInfo(51514)] = { id = 51514, cd = 45 },            -- Hex
 		[GetSpellInfo(16190)] = { id = 16190, cd = 300 },           -- Mana Tide Totem
 		[GetSpellInfo(16188)] = { id = 16188, cd = 180 },           -- Nature's Swiftness
 		[GetSpellInfo(20608)] = { id = 20608, cd = 3600, ora = 2 }, -- Reincarnation
@@ -59,6 +73,7 @@ local cooldowns = {
 		[GetSpellInfo(1161)]  = { id = 1161,  cd = 180 },           -- Challenging Shout
 		[GetSpellInfo(12975)] = { id = 12975, cd = 180 },           -- Last Stand
 		[GetSpellInfo(6554)]  = { id = 6554,  cd = 10 },            -- Pummel
+		[GetSpellInfo(72)]    = { id = 72,    cd = 12 },            -- Shield Bash
 		[GetSpellInfo(871)]   = { id = 871,   cd = 300 },           -- Shield Wall
 	},
 }

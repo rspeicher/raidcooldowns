@@ -243,7 +243,7 @@ local options = {
 }
 
 do
-	local classes = {"DRUID", "HUNTER", "MAGE", "PALADIN", "PRIEST", "ROGUE", "SHAMAN", "WARLOCK", "WARRIOR"}
+	local classes = {"DEATHKNIGHT", "DRUID", "HUNTER", "MAGE", "PALADIN", "PRIEST", "ROGUE", "SHAMAN", "WARLOCK", "WARRIOR"}
 	local t = options.args.spells.args
 	local i = 5 -- Sorting
 	local Display = Display
