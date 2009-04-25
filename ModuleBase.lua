@@ -39,8 +39,7 @@ function base:Sync(id, cooldown)
 	self:Print("Sync(", id, cooldown, ")")
 	--@end-debug@
 	
-	-- TODO: Change distro to "RAID"
-	RaidCooldowns:SendCommMessage(RaidCooldowns.prefix, (id .. " " .. cooldown), "WHISPER", UnitName("player"))
+	RaidCooldowns:SendCommMessage(RaidCooldowns.prefix, (id .. " " .. cooldown), "RAID")
 end
 
 --------------[[		Talent Modifiers		]]--------------
