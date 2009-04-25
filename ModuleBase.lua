@@ -23,7 +23,7 @@ function base:OnEnable()
 	-- whether or not the spell being cast might affect something OTHER than the
 	-- global cooldown, and if so, sets this variable to true. If we didn't do this,
 	-- the Comm channel would be sent a message (albeit a small one) every time the
-	-- user cast a spell, regardless of what it was or if it even had a cooldown.
+	-- user casts a spell, regardless of what it was or if it even had a cooldown.
 	self.canScanCooldowns = true
 	self:ScanSpells()
 	
@@ -112,8 +112,8 @@ function base:ScanSpells()
 	for k, v in pairs(self.cooldowns) do
 		cooldown = self:GetCooldown(k)
 		-- Sync if the cooldown is 0 so we can stop bars that are no longer on
-		-- cooldown, like a Glyphed Guardian Spirit, or if it's greater than 2,
-		-- meaning this isn't the global cooldown and it's a length worth tracking
+		-- cooldown, like after a respec, or if it's a cooldown greater than 2,
+		-- meaning this isn't the global cooldown and it's a length worth syncing
 		if cooldown == 0 or cooldown > 2 then
 			self:Sync(v, cooldown)
 		end
