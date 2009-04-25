@@ -80,7 +80,7 @@ function base:Sync(id, cooldown)
 end
 
 function base:ScanSpells()
-  if canScanCooldowns == false then return end
+	if canScanCooldowns == false then return end
 
 	--@debug@
 	self:Print("ScanSpells")
