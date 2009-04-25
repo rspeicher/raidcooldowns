@@ -91,13 +91,13 @@ function mod:StartCooldown(sender, spellId, cooldown)
 	-- a sync might be sent multiple times for the same spell. This block prevents
 	-- the bar from constantly updating its max time, making it look like the
 	-- cooldown is being used again.
-	local bar = barGroup:GetBar((sender .. "_" .. spellId))
+	local bar = barGroup:GetBar(sender .. "_" .. spellId)
 	if bar == nil then
 		bar = barGroup:NewTimerBar((sender .. "_" .. spellId), sender, cooldown, cooldown, spellId)
 		bar.caster  = sender
 		bar.spellId = spellId
 	else
-		bar:UpdateTimer(cooldown)
+		bar:SetTimer(cooldown, bar.maxValue)
 	end
 
 	local _, c = UnitClass(sender)
@@ -116,6 +116,13 @@ function mod:StartCooldown(sender, spellId, cooldown)
 	if type(color) == "table" then
 		bar:SetColorAt(1.00, color.r, color.g, color.b, 1)
 		bar:SetColorAt(0.00, color.r, color.g, color.b, 1)
+	end
+end
+
+function mod:StopCooldown(sender, spellId)
+	local bar = barGroup:GetBar(sender .. "_" .. spellId)
+	if bar ~= nil then
+		barGroup:RemoveBar(bar)
 	end
 end
 
@@ -183,12 +190,6 @@ function mod:CreateFrame()
 	barGroup = nil
 	
 	barGroup = self:NewBarGroup(L["RaidCooldowns"], nil, self.db.profile.width, self.db.profile.height, "RCDD_Anchor")
-	--[[
-	barGroup:SetColorAt(1.00, 1, 0, 0, 1)
-	barGroup:SetColorAt(0.66, 1, 1, 0, 1)
-	barGroup:SetColorAt(0.33, 0, 1, 1, 1)
-	barGroup:SetColorAt(0.00, 0, 0, 1, 1)
-	]]
 	barGroup:SetFlashPeriod(0)
 	barGroup:SetSortFunction(sortFunc)
 	
