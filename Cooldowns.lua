@@ -19,7 +19,7 @@ local cooldowns = {
 		[GetSpellInfo(47528)] = { id = 47528, cd = 10 },            -- Mind Freeze
 	},
 	["DRUID"] = {
-		[GetSpellInfo(22812)] = { id = 22812, cd = 60 },            -- Barksin
+		[GetSpellInfo(22812)] = { id = 22812, cd = 60 },            -- Barkskin
 		[GetSpellInfo(5209)]  = { id = 5209,  cd = 180 },           -- Challenging Roar
 		[GetSpellInfo(29166)] = { id = 29166, cd = 360 },           -- Innervate
 		[GetSpellInfo(17116)] = { id = 17116, cd = 180 },           -- Nature's Swiftness
