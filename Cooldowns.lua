@@ -52,8 +52,8 @@ local cooldowns = {
 		[GetSpellInfo(20608)] = { id = 20608, cd = 3600, ora = 2 }, -- Reincarnation
 	},
 	["WARLOCK"] = {
-		[GetSpellInfo(47883)] = { id = 47883, cd = 1800, ora = 3 }, -- Soulstone Resurrection
 		[GetSpellInfo(29858)] = { id = 29858, cd = 300 },           -- Soulshatter
+		[GetSpellInfo(47883)] = { id = 47883, cd = 1800, ora = 3 }, -- Soulstone Resurrection
 	},
 	["WARRIOR"] = {
 		[GetSpellInfo(1161)]  = { id = 1161,  cd = 180 },           -- Challenging Shout
