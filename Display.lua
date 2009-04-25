@@ -123,6 +123,7 @@ function mod:StopCooldown(sender, spellId)
 	local bar = barGroup:GetBar(sender .. "_" .. spellId)
 	if bar ~= nil then
 		barGroup:RemoveBar(bar)
+		self:UpdateDisplay() -- Removes a gap that appears in edge cases
 	end
 end
 
