@@ -11,6 +11,9 @@
 
 embeds.xml
 locale\enUS.lua
+locale\koKR.lua
+locale\zhCN.lua
+locale\zhTW.lua
 
 # Base
 RaidCooldowns.lua
