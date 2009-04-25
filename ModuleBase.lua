@@ -9,23 +9,27 @@ local GetSpellCooldown = _G.GetSpellCooldown
 
 local base = {}
 
--- SPELL_UPDATE_COOLDOWN is fired every time a spell is cast, because of the
--- global cooldown. Using this variable lets UNIT_SPELLCAST_SUCCEEDED determine
--- whether or not the spell being cast might affect something OTHER than the
--- global cooldown, and if so, sets this variable to true. If we didn't do this,
--- the Comm channel would be sent a message (albeit a small one) every time the
--- user cast a spell, regardless of what it was or if it even had a cooldown.
-local canScanCooldowns = false
-
 function base:OnInitialize()
 	self:SetEnabledState(false)
 end
 
 function base:OnEnable()
-	canScanCooldowns = true
+	--@debug@
+	self:Print("OnEnable")
+	--@end-debug@
+	
+	-- SPELL_UPDATE_COOLDOWN is fired every time a spell is cast, because of the
+	-- global cooldown. Using this variable lets UNIT_SPELLCAST_SUCCEEDED determine
+	-- whether or not the spell being cast might affect something OTHER than the
+	-- global cooldown, and if so, sets this variable to true. If we didn't do this,
+	-- the Comm channel would be sent a message (albeit a small one) every time the
+	-- user cast a spell, regardless of what it was or if it even had a cooldown.
+	self.canScanCooldowns = true
 	self:ScanSpells()
 	
-	self:RegisterEvent("CHARACTER_POINTS_CHANGED", "ScanSpells")
+	self:RegisterEvent("CHARACTER_POINTS_CHANGED", "Respec")
+	self:RegisterEvent("CONFIRM_TALENT_WIPE", "Respec")
+	self:RegisterEvent("PLAYER_TALENT_UPDATE", "Respec")
 	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "GenericSpellSuccess")
 	self:RegisterEvent("SPELL_UPDATE_COOLDOWN", "ScanSpells")
 end
@@ -48,7 +52,16 @@ function base:GenericSpellSuccess(event, unit, spell)
 	-- If we scanned the spell's cooldown right now, we'd get the global cooldown
 	-- instead of the actual cooldown; set canScanCooldowns = true so that the next
 	-- SPELL_UPDATE_COOLDOWN event can process the cooldown correctly
-	canScanCooldowns = true
+	self.canScanCooldowns = true
+end
+
+function base:Respec(event)
+	--@debug@
+	self:Print("Respec", event)
+	--@end-debug@
+	
+	self.canScanCooldowns = true
+	self:ScanSpells()
 end
 
 function base:GetCooldown(spell)
@@ -64,8 +77,17 @@ end
 
 --------------[[		Comm Methods		]]--------------
 
-function base:Sync(id, cooldown)
-	if cooldown == 0 then return end
+function base:Sync(data, cooldown)
+	if cooldown == nil then return end
+	
+	local id = data
+	if type(data) == "table" then
+		id = data.id
+		
+		if not oRA and data.ora ~= nil then
+			RaidCooldowns:SendCommMessage("oRA", "CD " .. data.ora .. " " .. (cooldown / 60), "RAID")
+		end
+	end
 	
 	--@debug@
 	self:Print("Sync(", id, cooldown, ")")
@@ -80,7 +102,7 @@ function base:Sync(id, cooldown)
 end
 
 function base:ScanSpells()
-	if canScanCooldowns == false then return end
+	if self.canScanCooldowns == false then return end
 
 	--@debug@
 	self:Print("ScanSpells")
@@ -89,16 +111,15 @@ function base:ScanSpells()
 	local cooldown
 	for k, v in pairs(self.cooldowns) do
 		cooldown = self:GetCooldown(k)
-		if cooldown > 2 then
-			self:Sync(v.id, cooldown)
-			
-			if not oRA and v.ora ~= nil then
-				RaidCooldowns:SendCommMessage("oRA", "CD " .. v.ora .. " " .. (remaining / 60), "RAID")
-			end
+		-- Sync if the cooldown is 0 so we can stop bars that are no longer on
+		-- cooldown, like a Glyphed Guardian Spirit, or if it's greater than 2,
+		-- meaning this isn't the global cooldown and it's a length worth tracking
+		if cooldown == 0 or cooldown > 2 then
+			self:Sync(v, cooldown)
 		end
 	end
 	
-	canScanCooldowns = false
+	self.canScanCooldowns = false
 end
 
 RaidCooldowns.ModuleBase = base
