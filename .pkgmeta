@@ -25,3 +25,6 @@ externals:
     libs/AceTimer-3.0:
         url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTimer-3.0
         tag: latest
+    libs/LibBars-1.0:
+        url: svn://svn.wowace.com/wow/libbars-1-0/mainline/trunk/LibBars-1.0
+        tag: latest

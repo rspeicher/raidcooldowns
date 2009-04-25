@@ -8,4 +8,5 @@
 	<Include file="libs\AceEvent-3.0\AceEvent-3.0.xml"/>
 	<Include file="libs\AceSerializer-3.0\AceSerializer-3.0.xml"/>
 	<Include file="libs\AceTimer-3.0\AceTimer-3.0.xml"/>
+	<Include file="libs\LibBars-1.0\lib.xml"/>
 </Ui>
