@@ -36,6 +36,9 @@ local cooldowns = {
 		[GetSpellInfo(6346)]  = { id = 6346,  cd = 180 },           -- Fear Ward
 		[GetSpellInfo(47788)] = { id = 47788, cd = 180 },           -- Guardian Spirit
 		[GetSpellInfo(33206)] = { id = 33206, cd = 180 },           -- Pain Suppression
+		--@debug@
+		[GetSpellInfo(48066)] = { id = 48066, cd = 4 },             -- Power Word: Shield (Debug)
+		--@end-debug@
 	},
 	["ROGUE"] = {
 		[GetSpellInfo(31224)] = { id = 31224, cd = 90 },            -- Cloak of Shadows

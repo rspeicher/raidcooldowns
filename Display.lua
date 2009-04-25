@@ -84,10 +84,6 @@ function mod:OnDisable()
 end
 
 function mod:StartCooldown(sender, spellId, cooldown)
-	--@debug@
-	self:Print("StartCooldown(", sender, spellId, cooldown, ")")
-	--@end-debug@
-	
 	if self.db.profile.hideSelf and sender == playerName then return end
 	if not self.db.profile.spells[spellId] then return end -- Only show a bar for this spell if the user enabled it
 	

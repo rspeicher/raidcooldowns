@@ -8,6 +8,7 @@ local GetTime = _G.GetTime
 local GetSpellCooldown = _G.GetSpellCooldown
 
 local base = {}
+local lastScan = 0
 
 function base:OnInitialize()
 	self:SetEnabledState(false)
@@ -39,7 +40,12 @@ function base:Sync(id, cooldown)
 	self:Print("Sync(", id, cooldown, ")")
 	--@end-debug@
 	
+	--@debug@
 	RaidCooldowns:SendCommMessage(RaidCooldowns.prefix, (id .. " " .. cooldown), "RAID")
+	--@end-debug@
+	--@non-debug@
+	RaidCooldowns:SendCommMessage(RaidCooldowns.prefix, (id .. " " .. cooldown), "WHISPER", UnitName("player"))
+	--@end-non-debug@
 end
 
 --------------[[		Talent Modifiers		]]--------------
@@ -53,6 +59,8 @@ function base:ScanTalents()
 end
 
 function base:ScanSpells()
+  if GetTime() - lastScan < 1 then return end
+
 	--@debug@
 	self:Print("ScanSpells")
 	--@end-debug@
@@ -60,7 +68,7 @@ function base:ScanSpells()
 	local startTime, duration, enabled, remaining
 	for k, v in pairs(self.cooldowns) do
 		startTime, cooldown, enabled = GetSpellCooldown(k)
-		if startTime > 0 and cooldown > 1 and enabled == 1 then
+		if startTime and startTime > 0 and cooldown >= 2 and enabled == 1 then
 			remaining = math.ceil(startTime + cooldown - GetTime())
 			self:Sync(v.id, remaining)
 			
@@ -72,6 +80,8 @@ function base:ScanSpells()
 			end
 		end
 	end
+	
+	lastScan = GetTime()
 end
 
 RaidCooldowns.ModuleBase = base
