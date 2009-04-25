@@ -124,6 +124,10 @@ function RaidCooldowns:OnCommReceived(prefix, msg, distro, sender)
 		spellId  = tonumber(spellId)
 		cooldown = tonumber(cooldown)
 		
-		self:GetModule("Display"):StartCooldown(sender, spellId, cooldown)
+		if cooldown == 0 then
+			self:GetModule("Display"):StopCooldown(sender, spellId)
+		else
+			self:GetModule("Display"):StartCooldown(sender, spellId, cooldown)
+		end
 	end
 end
