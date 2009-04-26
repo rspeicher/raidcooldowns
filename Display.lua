@@ -48,6 +48,16 @@ local defaults = {
 }
 local optFrame
 function mod:OnInitialize()
+	--@debug@
+	self:Print("OnInitialize()")
+	--@end-debug@
+end
+
+function mod:OnEnable()
+	--@debug@
+	self:Print("OnEnable()")
+	--@end-debug@
+	
 	self.db = LibStub("AceDB-3.0"):New("RCD_DB", nil, "Default")
 	
 	if not self.db.profile.spells or #self.db.profile.spells == 0 then
@@ -71,16 +81,13 @@ function mod:OnInitialize()
 	self:CreateFrame()
 end
 
-function mod:OnEnable()
-	--@debug@
-	self:Print("OnEnable()")
-	--@end-debug@
-end
-
 function mod:OnDisable()
 	--@debug@
 	self:Print("OnDisable()")
 	--@end-debug@
+	
+	self:UnregisterAllEvents()
+	barGroup = nil
 end
 
 function mod:StartCooldown(sender, spellId, cooldown)
