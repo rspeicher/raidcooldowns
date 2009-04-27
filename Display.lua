@@ -73,12 +73,14 @@ function mod:OnEnable()
 	
 	optFrame = AceConfig:AddToBlizOptions(L["RaidCooldowns"], L["RaidCooldowns"])
 	
-	self:UnregisterAllEvents()
-	self:RegisterEvent("PLAYER_LOGIN")
+	--self:UnregisterAllEvents()
+	--self:RegisterEvent("PLAYER_LOGIN")
 
 	playerName = UnitName("player")
 	
 	self:CreateFrame()
+	self:SetAnchors(true)
+	self:UpdateDisplay()
 end
 
 function mod:OnDisable()
@@ -86,7 +88,7 @@ function mod:OnDisable()
 	self:Print("OnDisable()")
 	--@end-debug@
 	
-	self:UnregisterAllEvents()
+	--self:UnregisterAllEvents()
 	barGroup = nil
 end
 
@@ -136,11 +138,9 @@ end
 
 function mod:PLAYER_LOGIN()
 	--@debug@
-	self:Print("PLAYER_LOGIN()")
+	--self:Print("PLAYER_LOGIN()")
 	--@end-debug@
-	self:SetAnchors(true)
-	self:UpdateDisplay()
-	self:UnregisterEvent("PLAYER_LOGIN")
+	--self:UnregisterEvent("PLAYER_LOGIN")
 end
 
 --[[		Configuration Methods		]]--

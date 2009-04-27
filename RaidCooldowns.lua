@@ -7,28 +7,24 @@ local UnitName = _G.UnitName
 
 function RaidCooldowns:OnInitialize()
 	self:UnregisterAllEvents()
-	-- self:SetEnabledState(false) -- Enabled when we join a raid
+	self:SetEnabledState(false) -- Enabled when we join a raid
 	
 	--@debug@
 	self:Print("OnInitialize")
 	--@end-debug@
 
 	self.prefix = "RCD2"
+	
+	self:RegisterEvent("PLAYER_LOGIN")
+end
+
+function RaidCooldowns:OnEnable()
 	self:RegisterComm(self.prefix)
 	self:RegisterComm("oRA")
 	self:RegisterComm("CTRA")
 	
 	self:RegisterEvent("RAID_ROSTER_UPDATE")
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-	
-	-- Logged in or reloaded in a raid; fake a RAID_ROSTER_UPDATE
-	if UnitInRaid("player") then
-		self:RAID_ROSTER_UPDATE()
-	end
-end
-
-function RaidCooldowns:OnEnable()
-	self:RegisterComm(self.prefix)
 	
 	local name, module
 	for name, module in self:IterateModules() do
@@ -39,22 +35,27 @@ function RaidCooldowns:OnEnable()
 end
 
 function RaidCooldowns:OnDisable()
+	--[[
 	local name, module
 	for name, module in self:IterateModules() do
 		self:DisableModule(name)
 	end
+	]]
 end
 
 --------------[[		Events		]]--------------
+
+function RaidCooldowns:PLAYER_LOGIN()
+	-- Logged in or reloaded in a raid; fake a RAID_ROSTER_UPDATE
+	if UnitInRaid("player") then
+		self:RAID_ROSTER_UPDATE()
+	end	
+end
 
 -- oRA2
 do
 	local inRaid = false
 	function RaidCooldowns:RAID_ROSTER_UPDATE()
-		--@debug@
-		self:Print("RAID_ROSTER_UPDATE")
-		--@end-debug@
-		
 		local inRaidNow = UnitInRaid("player")
 		if not inRaid and inRaidNow then
 			--@debug@
@@ -79,9 +80,6 @@ function RaidCooldowns:COMBAT_LOG_EVENT_UNFILTERED(event, _, eventType, _, srcNa
 	if self.cooldowns[c] then
 		local spells = self.cooldowns[c]
 		if spells[spellName] then
-			--@debug@
-			self:Print("Starting cooldown from CLEU", srcName, spellName)
-			--@end-debug@
 			self:GetModule("Display"):StartCooldown(srcName, spellId, spells[spellName].cd)
 			return
 		end
@@ -94,10 +92,6 @@ end
 
 function RaidCooldowns:OnCommReceived(prefix, msg, distro, sender)
 	if self:GetModule("Display").db.profile.hideSelf and sender == playerName then return end
-	
-	--@debug@
-	self:Print("OnCommReceived(", prefix, msg, distro, sender, ")")
-	--@end-debug@
 	
 	local spellId, cooldown = 0, 0
 	
@@ -120,6 +114,9 @@ function RaidCooldowns:OnCommReceived(prefix, msg, distro, sender)
 			end
 		end
 	else
+		--@debug@
+		self:Print("OnCommReceived(", prefix, msg, distro, sender, ")")
+		--@end-debug@
 		spellId, cooldown = select(3, msg:find("(%d+) (%d+)"))
 		spellId  = tonumber(spellId)
 		cooldown = tonumber(cooldown)

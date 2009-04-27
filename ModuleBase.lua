@@ -90,11 +90,11 @@ function base:Sync(data, cooldown)
 	end
 	
 	--@debug@
-	self:Print("Sync(", id, cooldown, ")")
+	--self:Print("Sync(", id, cooldown, ")")
 	--@end-debug@
 	
 	--@debug@
-	RaidCooldowns:SendCommMessage(RaidCooldowns.prefix, (id .. " " .. cooldown), "WHISPER", UnitName("player"))
+	--RaidCooldowns:SendCommMessage(RaidCooldowns.prefix, (id .. " " .. cooldown), "WHISPER", UnitName("player"))
 	--@end-debug@
 	--@non-debug@
 	RaidCooldowns:SendCommMessage(RaidCooldowns.prefix, (id .. " " .. cooldown), "RAID")

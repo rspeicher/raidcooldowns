@@ -49,7 +49,7 @@ local cooldowns = {
 		[GetSpellInfo(64901)] = { id = 64901, cd = 360 },           -- Hymn of Hope
 		[GetSpellInfo(33206)] = { id = 33206, cd = 180 },           -- Pain Suppression
 		--@debug@
-		[GetSpellInfo(48066)] = { id = 48066, cd = 4 },             -- Power Word: Shield (Debug)
+		--[GetSpellInfo(48066)] = { id = 48066, cd = 4 },             -- Power Word: Shield (Debug)
 		--@end-debug@
 	},
 	["ROGUE"] = {
