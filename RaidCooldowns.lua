@@ -23,7 +23,6 @@ function RaidCooldowns:OnEnable()
 	self:RegisterComm("oRA")
 	self:RegisterComm("CTRA")
 	
-	self:RegisterEvent("RAID_ROSTER_UPDATE")
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	
 	local name, module
@@ -46,10 +45,8 @@ end
 --------------[[		Events		]]--------------
 
 function RaidCooldowns:PLAYER_LOGIN()
-	-- Logged in or reloaded in a raid; fake a RAID_ROSTER_UPDATE
-	if UnitInRaid("player") then
-		self:RAID_ROSTER_UPDATE()
-	end	
+	self:RegisterEvent("RAID_ROSTER_UPDATE")
+	self:RAID_ROSTER_UPDATE()
 end
 
 -- oRA2
@@ -115,7 +112,7 @@ function RaidCooldowns:OnCommReceived(prefix, msg, distro, sender)
 		end
 	else
 		--@debug@
-		self:Print("OnCommReceived(", prefix, msg, distro, sender, ")")
+		--self:Print("OnCommReceived(", prefix, msg, distro, sender, ")")
 		--@end-debug@
 		spellId, cooldown = select(3, msg:find("(%d+) (%d+)"))
 		spellId  = tonumber(spellId)

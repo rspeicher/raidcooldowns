@@ -56,10 +56,6 @@ function base:GenericSpellSuccess(event, unit, spell)
 end
 
 function base:Respec(event)
-	--@debug@
-	self:Print("Respec", event)
-	--@end-debug@
-	
 	self.canScanCooldowns = true
 	self:ScanSpells()
 end
