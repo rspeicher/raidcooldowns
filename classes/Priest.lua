@@ -29,10 +29,6 @@ function mod:PriestSpellSuccess(event, unit, spell)
 end
 
 function mod:GuardianScan()
-	--@debug@
-	self:Print("GuardianScan")
-	--@end-debug@
-	
 	self.canScanCooldowns = true
 	self:ScanSpells()
 end

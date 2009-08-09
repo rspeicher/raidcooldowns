@@ -99,10 +99,6 @@ end
 
 function base:ScanSpells()
 	if self.canScanCooldowns == false then return end
-
-	--@debug@
-	self:Print("ScanSpells")
-	--@end-debug@
 	
 	local cooldown
 	for k, v in pairs(self.cooldowns) do

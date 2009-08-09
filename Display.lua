@@ -89,7 +89,7 @@ function mod:OnDisable()
 	--@end-debug@
 	
 	--self:UnregisterAllEvents()
-	barGroup = nil
+	--barGroup = nil
 end
 
 function mod:StartCooldown(sender, spellId, cooldown)
