@@ -23,8 +23,8 @@ local cooldowns = {
 		[GetSpellInfo(5209)]  = { id = 5209,  cd = 180 },           -- Challenging Roar
 		[GetSpellInfo(29166)] = { id = 29166, cd = 180 },           -- Innervate
 		[GetSpellInfo(17116)] = { id = 17116, cd = 180 },           -- Nature's Swiftness
-		[GetSpellInfo(48477)] = { id = 48477, cd = 1200, ora = 1 }, -- Rebirth
-		[GetSpellInfo(48447)] = { id = 48447, cd = 600 },           -- Tranquility
+		[GetSpellInfo(48477)] = { id = 48477, cd = 600, ora = 1 },  -- Rebirth
+		[GetSpellInfo(48447)] = { id = 48447, cd = 480 },           -- Tranquility
 	},
 	["HUNTER"] = {
 		[GetSpellInfo(5384)]  = { id = 5384,  cd = 30 },            -- Feign Death
@@ -35,7 +35,7 @@ local cooldowns = {
 		[GetSpellInfo(45438)] = { id = 45438, cd = 300 },           -- Ice Block
 	},
 	["PALADIN"] = {
-		[GetSpellInfo(19752)] = { id = 19752, cd = 1200, ora = 4 }, -- Divine Intervention
+		[GetSpellInfo(19752)] = { id = 19752, cd = 600, ora = 4 },  -- Divine Intervention
 		[GetSpellInfo(498)]   = { id = 498,   cd = 180 },           -- Divine Protection
 		[GetSpellInfo(64205)] = { id = 64205, cd = 120 },           -- Divine Sacrifice
 		[GetSpellInfo(642)]   = { id = 642,   cd = 300 },           -- Divine Shield
@@ -43,7 +43,7 @@ local cooldowns = {
 		[GetSpellInfo(48788)] = { id = 48788, cd = 1200 },          -- Lay on Hands
 	},
 	["PRIEST"] = {
-		[GetSpellInfo(64843)] = { id = 64843, cd = 600 },           -- Divine Hymn
+		[GetSpellInfo(64843)] = { id = 64843, cd = 480 },           -- Divine Hymn
 		[GetSpellInfo(6346)]  = { id = 6346,  cd = 180 },           -- Fear Ward
 		[GetSpellInfo(47788)] = { id = 47788, cd = 180 },           -- Guardian Spirit
 		[GetSpellInfo(64901)] = { id = 64901, cd = 360 },           -- Hymn of Hope
@@ -63,11 +63,11 @@ local cooldowns = {
 		[GetSpellInfo(51514)] = { id = 51514, cd = 45 },            -- Hex
 		[GetSpellInfo(16190)] = { id = 16190, cd = 300 },           -- Mana Tide Totem
 		[GetSpellInfo(16188)] = { id = 16188, cd = 180 },           -- Nature's Swiftness
-		[GetSpellInfo(20608)] = { id = 20608, cd = 3600, ora = 2 }, -- Reincarnation
+		[GetSpellInfo(20608)] = { id = 20608, cd = 1800, ora = 2 }, -- Reincarnation
 	},
 	["WARLOCK"] = {
 		[GetSpellInfo(29858)] = { id = 29858, cd = 300 },           -- Soulshatter
-		[GetSpellInfo(47883)] = { id = 47883, cd = 1800, ora = 3 }, -- Soulstone Resurrection
+		[GetSpellInfo(47883)] = { id = 47883, cd = 900, ora = 3 },  -- Soulstone Resurrection
 	},
 	["WARRIOR"] = {
 		[GetSpellInfo(1161)]  = { id = 1161,  cd = 180 },           -- Challenging Shout
